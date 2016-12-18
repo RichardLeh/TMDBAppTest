@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  TMDBAppTest
+//  TMDBApp
 //
 //  Created by Richard Leh on 17/12/2016.
 //  Copyright © 2016 Richard Leh. All rights reserved.

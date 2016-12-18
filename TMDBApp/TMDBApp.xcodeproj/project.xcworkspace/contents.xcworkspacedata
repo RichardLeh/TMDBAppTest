@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TMDBAppTest.xcodeproj">
+      location = "self:TMDBApp.xcodeproj">
    </FileRef>
 </Workspace>

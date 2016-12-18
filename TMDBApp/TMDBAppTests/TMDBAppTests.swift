@@ -1,15 +1,15 @@
 //
-//  TMDBAppTestTests.swift
-//  TMDBAppTestTests
+//  TMDBAppTests.swift
+//  TMDBAppTests
 //
 //  Created by Richard Leh on 17/12/2016.
 //  Copyright © 2016 Richard Leh. All rights reserved.
 //
 
 import XCTest
-@testable import TMDBAppTest
+@testable import TMDBApp
 
-class TMDBAppTestTests: XCTestCase {
+class TMDBAppTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
