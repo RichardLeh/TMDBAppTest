@@ -13,6 +13,10 @@
 		C52403CB1E06244B003FE584 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52403CA1E06244B003FE584 /* Assets.xcassets */; };
 		C52403CE1E06244B003FE584 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C52403CC1E06244B003FE584 /* LaunchScreen.storyboard */; };
 		C52403D91E06244B003FE584 /* TMDBAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52403D81E06244B003FE584 /* TMDBAppTests.swift */; };
+		C52403E41E0626B1003FE584 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52403E31E0626B1003FE584 /* Constants.swift */; };
+		C52403E61E064240003FE584 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52403E51E064240003FE584 /* Movie.swift */; };
+		C52403E81E08B650003FE584 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52403E71E08B650003FE584 /* General.swift */; };
+		C52403EF1E08C31C003FE584 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52403EE1E08C31C003FE584 /* Requests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,11 @@
 		C52403D41E06244B003FE584 /* TMDBAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMDBAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52403D81E06244B003FE584 /* TMDBAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAppTests.swift; sourceTree = "<group>"; };
 		C52403DA1E06244B003FE584 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C52403E31E0626B1003FE584 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C52403E51E064240003FE584 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		C52403E71E08B650003FE584 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		C52403ED1E08BC7C003FE584 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; };
+		C52403EE1E08C31C003FE584 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +87,13 @@
 			isa = PBXGroup;
 			children = (
 				C52403C31E06244B003FE584 /* AppDelegate.swift */,
-				C52403C51E06244B003FE584 /* ViewController.swift */,
-				C52403C71E06244B003FE584 /* Main.storyboard */,
-				C52403CA1E06244B003FE584 /* Assets.xcassets */,
-				C52403CC1E06244B003FE584 /* LaunchScreen.storyboard */,
-				C52403CF1E06244B003FE584 /* Info.plist */,
+				C52403E71E08B650003FE584 /* General.swift */,
+				C52403E31E0626B1003FE584 /* Constants.swift */,
+				C52403EE1E08C31C003FE584 /* Requests.swift */,
+				C52403EA1E08BB27003FE584 /* ViewController */,
+				C52403E51E064240003FE584 /* Movie.swift */,
+				C52403EC1E08BB67003FE584 /* Assets */,
+				C52403EB1E08BB4F003FE584 /* Supporting File */,
 			);
 			path = TMDBApp;
 			sourceTree = "<group>";
@@ -94,6 +105,33 @@
 				C52403DA1E06244B003FE584 /* Info.plist */,
 			);
 			path = TMDBAppTests;
+			sourceTree = "<group>";
+		};
+		C52403EA1E08BB27003FE584 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C52403C51E06244B003FE584 /* ViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		C52403EB1E08BB4F003FE584 /* Supporting File */ = {
+			isa = PBXGroup;
+			children = (
+				C52403CF1E06244B003FE584 /* Info.plist */,
+				C52403ED1E08BC7C003FE584 /* Playground.playground */,
+			);
+			name = "Supporting File";
+			sourceTree = "<group>";
+		};
+		C52403EC1E08BB67003FE584 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C52403C71E06244B003FE584 /* Main.storyboard */,
+				C52403CC1E06244B003FE584 /* LaunchScreen.storyboard */,
+				C52403CA1E06244B003FE584 /* Assets.xcassets */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +239,10 @@
 			files = (
 				C52403C61E06244B003FE584 /* ViewController.swift in Sources */,
 				C52403C41E06244B003FE584 /* AppDelegate.swift in Sources */,
+				C52403E81E08B650003FE584 /* General.swift in Sources */,
+				C52403EF1E08C31C003FE584 /* Requests.swift in Sources */,
+				C52403E61E064240003FE584 /* Movie.swift in Sources */,
+				C52403E41E0626B1003FE584 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +448,7 @@
 				C52403DF1E06244B003FE584 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C52403E01E06244B003FE584 /* Build configuration list for PBXNativeTarget "TMDBAppTests" */ = {
 			isa = XCConfigurationList;
@@ -414,6 +457,7 @@
 				C52403E21E06244B003FE584 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
