@@ -6,7 +6,7 @@ target ‘TMDBApp’ do
     use_frameworks!
     
     # Pods for TMDBApp
-    pod 'Reachability'
-    pod 'MBProgressHUD'
+    pod ‘Alamofire’
+    pod 'SVProgressHUD'
     
 end

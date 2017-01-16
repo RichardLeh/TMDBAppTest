@@ -1,38 +1,19 @@
 //: Playground - noun: a place where people can play
 
+import Foundation
 import UIKit
+import Alamofire
 
-var str = "Hello, playground"
-
-var varTeste = "123"
-
-func withParameter(_ teste: inout String){
-    print(teste)
+Alamofire.request("https://api.themoviedb.org/3/movie/76341?api_key=28190e24b6d3d0b73a9b5842bee9d8bf").validate().responseJSON { response in
+    debugPrint(response)
     
-    teste = teste + "000"
-    var teste2 = teste
-    teste2 = teste2 + "456"
-    
-    print(teste2)
-}
-
-withParameter(&varTeste)
-print(varTeste)
-
-var la = ""
-
-func getQuestionList(_ language: String) -> String {
-    var lang = language
-    if lang.isEmpty {
-        lang = "NL"
-        
-        return lang
+    switch response.result {
+    case .success:
+        print("Validation Successful")
+        if let json = response.result.value {
+            print("JSON: \(json)")
+        }
+    case .failure(let error):
+        print(error)
     }
-    
-    return lang
 }
-
-var laa = getQuestionList(la)
-
-print(la)
-print(laa)

@@ -8,36 +8,48 @@
 
 import Foundation
 
+enum ServerTMDBMovie:String{
+    case id = "id"
+    case title = "title"
+    case releaseDate = "releaseDate"
+    case posterPath = "poster_path"
+    case genreIds = "genre_ids"
+    case overview = "overview"
+}
+
 class Movie{
     
-    fileprivate var _id:Int
-    fileprivate var _name:String
-    fileprivate var _gender:String
-    fileprivate var _imageURL:String
-    fileprivate var _releaseDate:String
+    var id:Int?
+    var title:String?
+    var genreIds:[Int]?
+    var posterPath:String?
+    var releaseDate:String?
+    var overview:String?
     
-    init(with id:Int, name: String, gender: String, imageURL:String, releaseDate:String) {
-        self._id = id
-        self._name = name
-        self._gender = gender
-        self._imageURL = imageURL
-        self._releaseDate = releaseDate
-    }
+    var genres:[Genrer]?
     
-    func id() -> Int{
-        return self._id
+    // including movie name, poster or backdrop image, genre and release date.
+    // name, poster image, genre, overview and release date
+    convenience init(withDict dictionary:DictionaryData) {
+        self.init()
+        
+        if let _id = dictionary[ServerTMDBMovie.id.rawValue] as? Int{
+            self.id = _id
+        }
+        if let _title = dictionary[ServerTMDBMovie.title.rawValue] as? String{
+            self.title = _title
+        }
+        if let _genreIds = dictionary[ServerTMDBMovie.genreIds.rawValue] as? [Int]{
+            self.genreIds = _genreIds
+        }
+        if let _posterPath = dictionary[ServerTMDBMovie.genreIds.rawValue] as? String{
+            self.posterPath = _posterPath
+        }
+        if let _releaseDate = dictionary[ServerTMDBMovie.releaseDate.rawValue] as? String{
+            self.releaseDate = _releaseDate
+        }
+        if let _overview = dictionary[ServerTMDBMovie.overview.rawValue] as? String{
+            self.overview = _overview
+        }
     }
-    func name() -> String{
-        return self._name
-    }
-    func gender() -> String{
-        return self._gender
-    }
-    func imageURL() -> String{
-        return self._imageURL
-    }
-    func releaseDate() -> String{
-        return self._releaseDate
-    }
-    
 }

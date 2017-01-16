@@ -1,15 +1,15 @@
 PODS:
-  - MBProgressHUD (1.0.0)
-  - Reachability (3.2)
+  - Alamofire (4.3.0)
+  - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
-  - MBProgressHUD
-  - Reachability
+  - Alamofire
+  - SVProgressHUD
 
 SPEC CHECKSUMS:
-  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 8c112f5b529ef187a65f0740703c2a5fb8fe6fdc
+PODFILE CHECKSUM: f07cfd833d33a4762eb3f0f9f40f55fa23ea3fb3
 
-COCOAPODS: 1.2.0.beta.3
+COCOAPODS: 1.1.1

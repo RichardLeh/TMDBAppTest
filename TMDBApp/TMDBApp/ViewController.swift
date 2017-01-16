@@ -7,76 +7,65 @@
 //
 
 import UIKit
+import Alamofire
+import SVProgressHUD
+
+enum jsonResult:String {
+    case results = "results"
+    case totalPages = "total_pages"
+}
 
 class ViewController: UIViewController {
 
-    @IBOutlet var tableView:UITableView?
-    let tableCellIReusedentifier:String = "MovieCell"
+    @IBOutlet weak var tableView:UITableView!
+    let tableCellIdentifier:String = "MovieCell"
+    let noResultsCellIdentifier:String = "NoResultCell"
+    var movies = [Movie]()
+    var currentPage = 1
+    var totalPages = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestMovies()
-        tableView?.reloadData()
+        self.getMovies()
     }
     
-    private func requestMovies(){
-        let requestParameters = [Constants.TMDBMovieKeys.APIKEY: Constants.TMDBMovieValues.APIKEY+"1",
-                                 Constants.TMDBMovieKeys.Language: Constants.TMDBMovieValues.Language,
-                                 Constants.TMDBMovieKeys.Page : 1] as [String:Any]
-        
-        //if let movieURL = movieListURLFromParameters(requestParameters) {
-        let movieURL = movieListURLFromParameters(requestParameters)
-        let task = URLSession.shared.dataTask(with: movieURL) { (data, response, error) in
-            
-            /* GUARD: Was there an error? */
-            guard (error == nil) else {
-                self.showError("There is an error with your request: \(error)")
-                return
-            }
-            
-            guard let data = data else {
-                print("There isn't any data from request!")
-                return
-            }
-            
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                self.showError("Your request returned a status code other than 2xx!")
-                return
-            }
-            
-            // parse the data
-            let parsedResult: [String:AnyObject]!
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
-                print(parsedResult)
-            } catch {
-                print("Could not parse the data as JSON: '\(data)'")
-                return
-            }
-        }
-        
-        task.resume()
-
+    fileprivate func getMovies(fromJson json:DictionaryData){
+        print(json)
     }
-
-    private func movieListURLFromParameters(_ parameters: [String:Any]) -> URL {
+    
+    fileprivate func getMovies(){
         
-        var components = URLComponents()
-        components.scheme = Constants.TMDBMovie.APIScheme
-        components.host = Constants.TMDBMovie.APIHost
-        components.path = Constants.TMDBMovie.APIPath + Constants.TMDBMovie.APIMethod
-        components.queryItems = [URLQueryItem]()
+        //UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        SVProgressHUD.show()
         
-        for (key, value) in parameters {
-            let queryItem = URLQueryItem(name: key, value: "\(value)")
-            components.queryItems!.append(queryItem)
+        Requests.sharedInstance().requestUpcomingMovies(fromPage: currentPage){ [weak self] (result, error) in
+            
+            guard result != nil, let resultDict = result as? DictionaryData else{
+                self?.showError(error.debugDescription)
+                return
+            }
+            self?.parse(resultDict)
+            
+            self?.tableView?.reloadData()
+            
+            SVProgressHUD.dismiss()
         }
-        
-        return components.url!
+        //completion("", nil)
     }
-
+    
+    fileprivate func parse(_ data:DictionaryData){
+        guard let results = data[jsonResult.results.rawValue] as? [DictionaryData],
+              let totalPages = data[jsonResult.totalPages.rawValue] as? Int else {
+            return
+        }
+        self.totalPages = totalPages
+        
+        for result in results{
+            let movie = Movie(withDict: result)
+            self.movies.append(movie)
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -95,7 +84,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return movies.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -104,10 +93,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if movies.count > 0 {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: tableCellIdentifier, for: indexPath) as! MovieTableViewCell
+            let movie = movies[indexPath.row]
+            cell.fill(withMovie: movie)
+            
+            print("page ", currentPage, totalPages)
+            if movies.count - 1 == indexPath.row + 1 && currentPage + 1 <= totalPages {
+                print("page ", currentPage, totalPages)
+                currentPage = currentPage + 1
+                self.getMovies()
+            }
+            
+            return cell
+        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: tableCellIReusedentifier, for: indexPath)
-        
-        return cell
+        return tableView.dequeueReusableCell(withIdentifier: noResultsCellIdentifier, for: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
