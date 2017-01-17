@@ -19,15 +19,11 @@ class MovieTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleMovieLabel.textColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
+        self.selectionStyle = .none
+        self.contentView.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
+        titleMovieLabel.textColor = UIColor.init(hexString: Colors.defaultGreen.rawValue)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
     func fill(withMovie movie:Movie){
         if let backdropPath = movie.backdropPath,
             let url = Requests.sharedInstance().gerURL(forImagePath: backdropPath){
@@ -36,26 +32,10 @@ class MovieTableViewCell: UITableViewCell {
         }
         
         titleMovieLabel.text = movie.title
+        
         releaseDateLabel.text = movie.releaseDate?.dateStringFormated
         
-        if let mGenres = movie.genres {
-            
-            var genresString = ""
-            
-            let genresNames = mGenres.map { $0.name }
-            for (index, name) in genresNames.enumerated(){
-                guard let name = name else{
-                    return
-                }
-                genresString = genresString + name
-                if index != genresNames.count - 1{
-                    genresString = genresString + ", "
-                }
-            }
-            
-            genreLabel.text = genresString
-        }
-        
+        genreLabel.text = movie.genrerFormatedString()
     }
     
     override func prepareForReuse() {
@@ -70,6 +50,7 @@ class MovieTableViewCell: UITableViewCell {
         
         titleMovieLabel.text = ""
         releaseDateLabel.text = ""
+        genreLabel.text = ""
     }
 
 }

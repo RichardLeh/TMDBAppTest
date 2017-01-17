@@ -16,11 +16,13 @@ enum jsonResult:String {
     case totalPages = "total_pages"
 }
 
-class ViewController: UIViewController {
+class ListMovieViewController: UIViewController {
 
     @IBOutlet weak var tableView:UITableView!
     let tableCellIdentifier:String = "MovieCell"
     let noResultsCellIdentifier:String = "NoResultCell"
+    
+    var query:String = ""
     
     // collections
     var movies = [Movie]()
@@ -33,19 +35,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nav = self.navigationController?.navigationBar
-        nav?.tintColor = UIColor.white
+        self.view.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
+        self.tableView.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
         
-        let defBgColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
-        nav?.barTintColor = defBgColor
-        
-        let defColor = UIColor.init(hexString: Colors.defaultGreen.rawValue)
-        nav?.titleTextAttributes = [NSForegroundColorAttributeName:defColor]
-        
-        SVProgressHUD.setBackgroundColor(UIColor(hexString: Colors.defaultDarkBlue.rawValue))
-        SVProgressHUD.setForegroundColor(UIColor(hexString: Colors.defaultGreen.rawValue))
-        
-        self.title = "TMDBApp"
+        self.title = query
         self.getGenres()
     }
     
@@ -72,13 +65,12 @@ class ViewController: UIViewController {
         
         self.showProgress()
         
-        Requests.sharedInstance().requestUpcomingMovies(fromPage: currentPage){ [weak self] (result, error) in
+        Requests.sharedInstance().requestMovies(fromPage: currentPage, withQuery: query) { [weak self] (result, error) in
             
             guard result != nil, let resultDict = result as? DictionaryData else{
                 self?.showError(error.debugDescription)
                 return
             }
-            print("resultDict c ", resultDict.count)
             self?.parseMovie(resultDict)
             
             self?.tableView?.reloadData()
@@ -102,9 +94,7 @@ class ViewController: UIViewController {
               let total   = data[jsonResult.totalPages.rawValue] as? Int else {
             return
         }
-        print(totalPages, total)
-        totalPages = (totalPages > total) ? totalPages : total
-        print(totalPages, total)
+        totalPages = total
         
         for result in results{
             let movie = Movie(withDict: result, andGenres: self.genres)
@@ -138,7 +128,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ListMovieViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (movies.count == 0) ? 1 : movies.count
@@ -152,9 +142,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             let movie = movies[indexPath.row]
             cell.fill(withMovie: movie)
             
-            //print("page ", currentPage, totalPages)
-            if movies.count == indexPath.row + 1 && currentPage + 1 <= totalPages {
-                print("page ", currentPage, totalPages)
+            if movies.count - 1 == indexPath.row + 1 && currentPage + 1 <= totalPages {
                 currentPage = currentPage + 1
                 self.getMovies()
             }
@@ -162,7 +150,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
-        return tableView.dequeueReusableCell(withIdentifier: noResultsCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: noResultsCellIdentifier, for: indexPath)
+        cell.contentView.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

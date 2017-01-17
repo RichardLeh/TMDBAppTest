@@ -14,5 +14,6 @@ enum Colors: String{
 }
 
 enum Segues: String{
+    case resultMovieSegue = "resultMovieSegue"
     case detailMovieSegue = "detailMovieSegue"
 }

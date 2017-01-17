@@ -19,9 +19,31 @@ func updatesOnMain(_ updatesToMake: @escaping () -> Void) {
     }
 }
 
+func genrerFormatedString(fromMovie movie:Movie) -> String{
+    if let mGenres = movie.genres {
+        
+        var genresString = ""
+        
+        let genresNames = mGenres.map { $0.name }
+        for (index, name) in genresNames.enumerated(){
+            guard let name = name else{
+                break
+            }
+            genresString = genresString + name
+            if index != genresNames.count - 1{
+                genresString = genresString + ", "
+            }
+        }
+        
+        return genresString
+    }
+    return ""
+}
+
+
 // MARK: Extensions
 
-extension ViewController {
+extension UIViewController {
     
     func showProgress() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -43,9 +65,13 @@ extension String {
             let date = dateFormatter.date(from: self)
             
             dateFormatter.dateFormat = "MMMM dd, yyyy"
-            let dateString = dateFormatter.string(from: date!)
             
-            return dateString
+            if let date = date {
+                let dateString = dateFormatter.string(from: date)
+                
+                return dateString
+            }
+            return ""
         }
     }
     

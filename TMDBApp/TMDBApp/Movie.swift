@@ -66,3 +66,28 @@ class Movie{
         }
     }
 }
+
+extension Movie {
+    
+    func genrerFormatedString() -> String{
+        if let mGenres = self.genres {
+            
+            var genresString = ""
+            
+            let genresNames = mGenres.map { $0.name }
+            for (index, name) in genresNames.enumerated(){
+                guard let name = name else{
+                    break
+                }
+                genresString = genresString + name
+                if index != genresNames.count - 1{
+                    genresString = genresString + ", "
+                }
+            }
+            
+            return genresString
+        }
+        return ""
+    }
+    
+}
