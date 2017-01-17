@@ -31,7 +31,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.0024655105079999999" green="0.82190221549999998" blue="0.45326483249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 <connections>
                                     <outlet property="delegate" destination="Npb-Jw-XqW" id="E0G-2y-hLG"/>
                                 </connections>

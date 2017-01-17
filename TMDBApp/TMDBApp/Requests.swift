@@ -13,8 +13,9 @@ import Alamofire
 private struct TMDBMovieAPI {
     
     static let key = "28190e24b6d3d0b73a9b5842bee9d8bf"
-    //static let language = "en-US"// "en-UK", "pt-BR"
-    static let language = "pt-BR"
+    // 1f54bd990f1cdfb230adb312546d765d​.
+    
+    static let language = "en-US"// "en-UK", "pt-BR"
     
     static let upcomingPath = "https://api.themoviedb.org/3/movie/upcoming"
     static let genrerPath   = "https://api.themoviedb.org/3/genre/movie/list"
