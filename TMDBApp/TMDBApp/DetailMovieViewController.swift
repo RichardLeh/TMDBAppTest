@@ -24,7 +24,8 @@ class DetailMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //scrollView.bounces = false
+        self.title = movie?.title
+        
         self.view.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
         contentView.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
         scrollView.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
@@ -40,7 +41,6 @@ class DetailMovieViewController: UIViewController {
             
             posterImageView.af_setImage(withURL: url)
         }
-        
         
         titleMovieLabel.text = movie?.title
         releaseLabel.text = movie?.releaseDate?.dateStringFormated

@@ -38,7 +38,12 @@ class ListMovieViewController: UIViewController {
         self.view.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
         self.tableView.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
         
-        self.title = query
+        if query.isEmpty{
+            self.title = "Upcoming Movies"
+        }else{
+            self.title = query
+        }
+        
         self.getGenres()
     }
     

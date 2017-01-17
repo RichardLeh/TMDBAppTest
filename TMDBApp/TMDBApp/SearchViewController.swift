@@ -17,6 +17,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "TMDB"
+        
         let nav = self.navigationController?.navigationBar
         nav?.tintColor = UIColor.white
         
