@@ -10,27 +10,15 @@ import Foundation
 import Alamofire
 
 // MARK: API TMDB MOVIE
-struct TMDBMovieAPI {
-    static let upcomingPath = "https://api.themoviedb.org/3/movie/upcoming"
+private struct TMDBMovieAPI {
     
     static let key = "28190e24b6d3d0b73a9b5842bee9d8bf"
+    static let language = "en-US"// "en-UK", "pt-BR"
     
-    static let APIScheme = "https"
-    static let APIHost = "api.themoviedb.org"
-    static let APIPath = "/3"
-    static let APIMethod = "/movie/upcoming"
-}
-
-struct TMDBMovieKeys {
-    static let APIKEY = "api_key"
-    static let Language = "language"
-    static let Page = "page"
-}
-
-struct TMDBMovieValues {
-    static let APIKEY = "28190e24b6d3d0b73a9b5842bee9d8bf"
-    static let Language = "en-US"
-    static let Page = "1"
+    static let upcomingPath = "https://api.themoviedb.org/3/movie/upcoming"
+    static let genrerPath   = "https://api.themoviedb.org/3/genre/movie/list"
+    static let imagePath    = "https://image.tmdb.org/t/p/w780/"
+    
 }
 
 class Requests: NSObject{
@@ -55,7 +43,7 @@ class Requests: NSObject{
     fileprivate func request(fromString requestString: String, withCompletion completion: @escaping CompletionResultError) {
         
         Alamofire.request(requestString).validate().responseJSON { response in
-            debugPrint(response)
+            //debugPrint(response)
             
             switch response.result {
             case .success:
@@ -71,33 +59,32 @@ class Requests: NSObject{
     
     func requestUpcomingMovies(fromPage page:Int = 1, completion: @escaping CompletionResultError) {
         
-        let requestString = TMDBMovieAPI.upcomingPath + "/?api_key=" + TMDBMovieAPI.key + "&page=" + String(page)
+        let requestString = TMDBMovieAPI.upcomingPath +
+                            "?api_key=" + TMDBMovieAPI.key +
+                            "&language=" + TMDBMovieAPI.language +
+                            "&page=" + String(page)
+        
+        print(requestString)
         self.request(fromString: requestString, withCompletion: completion)
     }
+    
+    func requestGenrer(completion: @escaping CompletionResultError) {
+        
+        let requestString = TMDBMovieAPI.genrerPath +
+                            "?api_key=" + TMDBMovieAPI.key +
+                            "&language=" + TMDBMovieAPI.language
+        
+        print(requestString)
+        self.request(fromString: requestString, withCompletion: completion)
+    }
+    
+    func gerURL(forImagePath imagePath:String) -> URL?{
+        if let url = URL(string: TMDBMovieAPI.imagePath + imagePath){
+            return url
+        }
+        return nil
+    }
+    
 }
 
-/*
- 
- {
- "poster_path": "/ylXCdC106IKiarftHkcacasaAcb.jpg",
- "adult": false,
- "overview": "Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.",
- "release_date": "2016-12-01",
- "genre_ids": [
- 10749,
- 35,
- 18,
- 10402
- ],
- "id": 313369,
- "original_title": "La La Land",
- "original_language": "en",
- "title": "La La Land",
- "backdrop_path": "/nadTlnTE6DdgmYsN4iWc2a2wiaI.jpg",
- "popularity": 20.131656,
- "vote_count": 260,
- "video": false,
- "vote_average": 8
- }
- 
- */
+

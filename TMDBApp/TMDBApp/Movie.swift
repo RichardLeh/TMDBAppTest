@@ -11,8 +11,9 @@ import Foundation
 enum ServerTMDBMovie:String{
     case id = "id"
     case title = "title"
-    case releaseDate = "releaseDate"
+    case releaseDate = "release_date"
     case posterPath = "poster_path"
+    case backdropPath = "backdrop_path"
     case genreIds = "genre_ids"
     case overview = "overview"
 }
@@ -23,6 +24,7 @@ class Movie{
     var title:String?
     var genreIds:[Int]?
     var posterPath:String?
+    var backdropPath:String?
     var releaseDate:String?
     var overview:String?
     
@@ -30,7 +32,7 @@ class Movie{
     
     // including movie name, poster or backdrop image, genre and release date.
     // name, poster image, genre, overview and release date
-    convenience init(withDict dictionary:DictionaryData) {
+    convenience init(withDict dictionary:DictionaryData, andGenres genresArr:[Genrer]) {
         self.init()
         
         if let _id = dictionary[ServerTMDBMovie.id.rawValue] as? Int{
@@ -41,9 +43,20 @@ class Movie{
         }
         if let _genreIds = dictionary[ServerTMDBMovie.genreIds.rawValue] as? [Int]{
             self.genreIds = _genreIds
+            self.genres = []
+            
+            for id in genreIds!{
+                let genrer = genresArr.filter({ $0.id == id })
+                self.genres?.append(contentsOf: genrer)
+            }
         }
-        if let _posterPath = dictionary[ServerTMDBMovie.genreIds.rawValue] as? String{
+        
+        
+        if let _posterPath = dictionary[ServerTMDBMovie.posterPath.rawValue] as? String{
             self.posterPath = _posterPath
+        }
+        if let _backdropPath = dictionary[ServerTMDBMovie.backdropPath.rawValue] as? String{
+            self.backdropPath = _backdropPath
         }
         if let _releaseDate = dictionary[ServerTMDBMovie.releaseDate.rawValue] as? String{
             self.releaseDate = _releaseDate
