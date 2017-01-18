@@ -1,6 +1,6 @@
 # TMDBApp
 
-This is my project test for Arctouch. 
+This is my test project for Arctouch. 
 
 These are the third-party libraries that I used in this project
 
