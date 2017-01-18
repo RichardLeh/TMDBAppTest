@@ -40,7 +40,6 @@ func genrerFormatedString(fromMovie movie:Movie) -> String{
     return ""
 }
 
-
 // MARK: Extensions
 
 extension UIViewController {

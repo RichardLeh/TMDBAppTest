@@ -35,6 +35,12 @@ class ListMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.updateUI()
+        self.getGenres()
+    }
+    
+    fileprivate func updateUI(){
+        
         self.view.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
         self.tableView.backgroundColor = UIColor.init(hexString: Colors.defaultDarkBlue.rawValue)
         
@@ -43,13 +49,8 @@ class ListMovieViewController: UIViewController {
         }else{
             self.title = query
         }
-        
-        self.getGenres()
     }
-    
-    fileprivate func getMovies(fromJson json:DictionaryData){
-        print(json)
-    }
+
     fileprivate func getGenres(){
         
         self.showProgress()

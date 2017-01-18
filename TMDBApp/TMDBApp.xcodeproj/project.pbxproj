@@ -19,6 +19,7 @@
 		C52403E61E064240003FE584 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52403E51E064240003FE584 /* Movie.swift */; };
 		C52403E81E08B650003FE584 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52403E71E08B650003FE584 /* General.swift */; };
 		C52403EF1E08C31C003FE584 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52403EE1E08C31C003FE584 /* Requests.swift */; };
+		C53E5B591E2ED31A00ED3231 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53E5B581E2ED31A00ED3231 /* Language.swift */; };
 		C5D0F8121E2C36B000F67B91 /* Genrer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0F8111E2C36B000F67B91 /* Genrer.swift */; };
 		C5F892731E2EB1490060D64B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5F892721E2EB1490060D64B /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		C52403E71E08B650003FE584 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		C52403ED1E08BC7C003FE584 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; };
 		C52403EE1E08C31C003FE584 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		C53E5B581E2ED31A00ED3231 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		C5D0F8111E2C36B000F67B91 /* Genrer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genrer.swift; sourceTree = "<group>"; };
 		C5F892721E2EB1490060D64B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCE19154C4B2722682FB4899 /* Pods_TMDBApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDBApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 				C52403E71E08B650003FE584 /* General.swift */,
 				C52403E31E0626B1003FE584 /* Constants.swift */,
 				C52403EE1E08C31C003FE584 /* Requests.swift */,
+				C53E5B581E2ED31A00ED3231 /* Language.swift */,
 				C52403CF1E06244B003FE584 /* Info.plist */,
 				C52403ED1E08BC7C003FE584 /* Playground.playground */,
 			);
@@ -287,6 +290,7 @@
 				C52403E61E064240003FE584 /* Movie.swift in Sources */,
 				C50650E11E2D0F54006170AA /* MovieTableViewCell.swift in Sources */,
 				C52403E41E0626B1003FE584 /* Constants.swift in Sources */,
+				C53E5B591E2ED31A00ED3231 /* Language.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

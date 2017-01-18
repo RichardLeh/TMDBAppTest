@@ -30,8 +30,6 @@ class Movie{
     
     var genres:[Genrer]?
     
-    // including movie name, poster or backdrop image, genre and release date.
-    // name, poster image, genre, overview and release date
     convenience init(withDict dictionary:DictionaryData, andGenres genresArr:[Genrer]) {
         self.init()
         
@@ -41,6 +39,7 @@ class Movie{
         if let _title = dictionary[ServerTMDBMovie.title.rawValue] as? String{
             self.title = _title
         }
+        
         if let _genreIds = dictionary[ServerTMDBMovie.genreIds.rawValue] as? [Int]{
             self.genreIds = _genreIds
             self.genres = []
@@ -50,7 +49,6 @@ class Movie{
                 self.genres?.append(contentsOf: genrer)
             }
         }
-        
         
         if let _posterPath = dictionary[ServerTMDBMovie.posterPath.rawValue] as? String{
             self.posterPath = _posterPath

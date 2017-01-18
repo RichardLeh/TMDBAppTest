@@ -13,14 +13,12 @@ import Alamofire
 private struct TMDBMovieAPI {
     
     static let key = "28190e24b6d3d0b73a9b5842bee9d8bf"
-    // 1f54bd990f1cdfb230adb312546d765d​.
-    
-    static let language = "en-US"// "en-UK", "pt-BR"
+    // 1f54bd990f1cdfb230adb312546d765d​
     
     static let upcomingPath = "https://api.themoviedb.org/3/movie/upcoming"
     static let genrerPath   = "https://api.themoviedb.org/3/genre/movie/list"
     static let searchPath   = "http://api.themoviedb.org/3/search/movie"
-    static let imagePath    = "https://image.tmdb.org/t/p/w780/"
+    static let imagePath    = "https://image.tmdb.org/t/p/w780"
     
 }
 
@@ -35,16 +33,6 @@ class Requests: NSObject{
             static var sharedInstance = Requests()
         }
         return Singleton.sharedInstance
-    }
-    
-    func verifyNetwork(andMake request:String){
-        let manager = NetworkReachabilityManager()
-        
-        manager?.listener = { status in
-            print("Network Status Changed: \(status)")
-        }
-        
-        manager?.startListening()
     }
     
     fileprivate func request(fromString requestString: String, withCompletion completion: @escaping CompletionResultError) {
@@ -77,7 +65,7 @@ class Requests: NSObject{
         
         let requestString = TMDBMovieAPI.searchPath +
                             "?api_key=" + TMDBMovieAPI.key +
-                            "&language=" + TMDBMovieAPI.language +
+                            "&language=" + Language.getDefaultLanguage() +
                             "&query=" + query +
                             "&page=" + String(page)
         
@@ -99,7 +87,7 @@ class Requests: NSObject{
         
         let requestString = TMDBMovieAPI.upcomingPath +
                             "?api_key=" + TMDBMovieAPI.key +
-                            "&language=" + TMDBMovieAPI.language +
+                            "&language=" + Language.getDefaultLanguage() +
                             "&page=" + String(page)
         self.request(fromString: requestString, withCompletion: completion)
     }
@@ -108,7 +96,8 @@ class Requests: NSObject{
         
         let requestString = TMDBMovieAPI.genrerPath +
                             "?api_key=" + TMDBMovieAPI.key +
-                            "&language=" + TMDBMovieAPI.language
+                            "&language=" + Language.getDefaultLanguage()
+        
         self.request(fromString: requestString, withCompletion: completion)
     }
     

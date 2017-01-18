@@ -12,6 +12,7 @@ enum ServerTMDBGenrer:String{
     case id = "id"
     case name = "name"
 }
+
 class Genrer{
     var id:Int?
     var name:String?
@@ -27,52 +28,3 @@ class Genrer{
         }
     }
 }
-
-/*
-
-class Genres: NSObject{
-    
-    var genres = [Genrer]()
-    
-    class func sharedInstance() -> Genres {
-        struct Singleton {
-            static var sharedInstance = Genres()
-        }
-        return Singleton.sharedInstance
-    }
-    func getGenre(byId id:Int) -> Genrer? {
-        for genrer in genres {
-            if genrer.id == id{
-                return genrer
-            }
-        }
-        return nil
-    }
-    
-    fileprivate func getGenres(withCompletion completion: @escaping CompletionResultError) {
-        Requests.sharedInstance().requestGenrer{ [weak self] (result, error) in
-            
-            guard result != nil, let resultDict = result as? DictionaryData else{
-                completion(nil, error)
-                return
-            }
-            self?.parseGenrer(resultDict)
-            
-            completion(true, nil)
-        }
-    }
-    
-    fileprivate func parseGenrer(_ data:DictionaryData){
-        genres = [Genrer]()
-        
-        guard let results = data[jsonResult.genres.rawValue] as? [DictionaryData] else {
-            return
-        }
-        for result in results{
-            let genrer = Genrer(withDict: result)
-            genres.append(genrer)
-        }
-    }
-}
- 
- */
