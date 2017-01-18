@@ -116,8 +116,12 @@ class ListMovieViewController: UIViewController {
     func showError(_ error: String){
         print(error)
         updatesOnMain{
-            // TODO
-            // FIX.ME("Atualizar a UI")
+            self.dismissProgress()
+            
+            let alert = UIAlertController(title: "Error!", message: "Check your internet connection. An error has occurred on getting data \(error)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+
         }
     }
     
