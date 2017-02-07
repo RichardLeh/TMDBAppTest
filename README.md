@@ -1,7 +1,5 @@
 # TMDBApp
 
-This is my test project for Arctouch. 
-
 These are the third-party libraries that I used in this project
 
 1. Alamofire,
